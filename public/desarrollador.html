@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js" defer></script>
+    <title>Gestión de Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('navidadd.jpg');
+            /* Ruta de la imagen de fondo */
+            background-size: cover;
+            color: rgb(81, 40, 20);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .form-label {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-control {
+            font-size: 1.25rem;
+        }
+
+        .btn {
+            font-size: 1.25rem;
+            border: 2px solid white;
+        }
+
+        .btn-info {
+            background-color: rgb(25, 105, 25);
+        }
+
+        .message {
+            font-size: 2rem;
+            color: orange;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body class="container mt-5">
+
+    <header id="navbardes"></header>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        fetch("navbardes.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbardes").innerHTML = data;
+            })
+            .catch(error => console.error("Error al cargar el navegador:", error));
+        });
+    </script>
+    <center><br><br>
+        <h1 class="mb-4">LA DESESPERANZA</h1>
+    </center>
+    <br>
+    <br>
+
+    <div id="messageContainer"></div>
+
+    <!-- Formulario para agregar productos -->
+    <form action="/agregarProducto" method="post" enctype="multipart/form-data" class="mb-3">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Producto a agregar:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del Producto" >
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio del Producto a agregar:</label>
+            <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio del Producto">
+        </div>
+        <div class="mb-3">
+            <label for="cantidad_stock" class="form-label">Cantidad en Stock :</label>
+            <input type="number" id="cantidad_stock" name="cantidad_stock" class="form-control" placeholder="Cantidad en Stock">
+        </div>
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen del Producto:</label>
+            <input type="file" id="imagen" name="imagen" class="form-control" accept="image/*">
+        </div>
+        <input type="submit" value="Agregar Producto" class="btn btn-primary">
+    </form>
+
+    <hr>
+
+    <!-- Formulario para borrar productos -->
+    <form action="/borrarProducto" method="post" class="mb-3">
+        <div class="mb-3">
+            <label for="id_borrar" class="form-label">ID del Producto a Borrar:</label>
+            <input type="number" id="id_borrar" name="id_producto" class="form-control" placeholder="ID del Producto" >
+        </div>
+        <input type="submit" value="Borrar Producto" class="btn btn-danger">
+    </form>
+
+    <hr>
+
+    <!-- Formulario para actualizar productos -->
+    <form action="/actualizarProducto" method="post" enctype="multipart/form-data" class="mb-3">
+        <div class="mb-3">
+            <label for="id_actualizar" class="form-label">ID del Producto a Actualizar:</label>
+            <input type="number" id="id_actualizar" name="id_producto" class="form-control" placeholder="ID del Producto" >
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_nombre" class="form-label">Nuevo Nombre del Producto:</label>
+            <input type="text" id="nuevo_nombre" name="nuevo_nombre" class="form-control" placeholder="Nuevo Nombre del Producto" >
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_precio" class="form-label">Nuevo Precio del Producto:</label>
+            <input type="number" id="nuevo_precio" name="nuevo_precio" class="form-control" placeholder="Nuevo Precio del Producto" >
+        </div>
+        <div class="mb-3">
+            <label for="nuevo_stock" class="form-label">Nuevo Stock del Producto:</label>
+            <input type="number" id="nuevo_stock" name="nuevo_stock" class="form-control" placeholder="Nuevo Stock del Producto" >
+        </div>
+        <div class="mb-3">
+            <label for="nueva_imagen" class="form-label">Nueva Imagen del Producto:</label>
+            <input type="file" id="nueva_imagen" name="imagen" class="form-control" accept="image/*">
+        </div>
+        <input type="submit" value="Actualizar Producto" class="btn btn-warning">
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

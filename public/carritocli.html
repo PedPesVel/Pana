@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente - Carrito de Compras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url('white');
+            background-size: cover;
+            color: rgb(81, 40, 20);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .form-label {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-control {
+            font-size: 1rem;
+            height: 35px;
+            width: 250px;
+        }
+
+        .btn {
+            font-size: 1.25rem;
+            border: 2px solid white;
+        }
+
+        .btn-info {
+            background-color: rgb(25, 105, 25);
+        }
+
+        .message {
+            font-size: 2rem;
+            color: orange;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        table thead {
+            background-color: #6f4f28;
+            color: white;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header id="navbarcli"></header>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("navbarcli.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navbarcli").innerHTML = data;
+                })
+                .catch(error => console.error("Error al cargar el navegador:", error));
+        });
+    </script>
+
+    <!-- Contenedor para mostrar el saldo -->
+    <div id="saldoContainer" class="container mt-4 text-center">
+        <h3>Tu saldo actual:</h3>
+        <p id="saldoActual" class="fs-4 text-success">Cargando saldo...</p>
+    </div>
+
+    <!-- Contenedor para el carrito -->
+    <div id="carritoContainer" class="container mt-4"></div>
+
+    <center>
+        <form action="/eliminarcarro" method="post">
+            <div class="mb-3">
+                <label for="id_borrar" class="form-label">ID del Producto a Borrar:</label>
+                <input type="text" id="id_borrar" name="id_producto" class="form-control" placeholder="ID del Producto">
+            </div>
+            <input type="submit" value="Quitar del carrito" class="btn btn-danger">
+        </form>
+    </center>
+
+    <center>
+        <form id="agregarDineroForm" action="/dinero" method="post">
+            <div class="mb-3">
+                <label for="cantidad_dinero" class="form-label">Agregar Dinero:</label>
+                <input type="number" id="cantidad_dinero" name="cantidad_dinero" class="form-control" placeholder="Cantidad a Agregar">
+            </div>
+            <input type="submit" value="Agregar Dinero" class="btn btn-success">
+        </form>
+        <br>
+        <form action="/realizarCompra" method="post">
+            <input type="submit" value="Realizar Compra" class="btn btn-info">
+        </form>
+    </center>
+
+    <script>
+        // Cargar el saldo al cargar la página
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtener el saldo del cliente
+            fetch('/verSaldo')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo obtener el saldo.');
+                    }
+                    return response.text();
+                })
+                .then(saldo => {
+                    document.getElementById('saldoActual').innerText = saldo;
+                })
+                .catch(error => {
+                    console.error('Error al cargar el saldo:', error);
+                    document.getElementById('saldoActual').innerText = 'Error al cargar el saldo.';
+                });
+
+            // Cargar carrito
+            fetch('/carrito')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No se pudo obtener el carrito.');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('carritoContainer').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error al cargar el carrito:', error);
+                    document.getElementById('carritoContainer').innerHTML = '<p class="text-danger text-center">Error al cargar el carrito.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

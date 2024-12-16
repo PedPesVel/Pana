@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="sesion.css">
+    <style>
+        body {
+            background-image: url('navidadd.jpg');
+            /* Ruta de la imagen de fondo */
+            background-size: cover;
+            color: rgb(81, 40, 20);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+
+        <form action="/login" method="POST">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username"><br><br>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password"><br><br>
+
+            <label for="role">Tipo de Usuario:</label>
+            <select id="role" name="role">
+                <option value="Cliente">Cliente</option>
+                <option value="Desarrollador">Desarrollador</option>
+            </select><br><br>
+
+            <input type="submit" value="Iniciar Sesión" class="submit-button">
+        </form>
+
+        <a href="registro.html" class="register-button">Registrarse</a>
+    </div>
+</body>
+
+</html>
