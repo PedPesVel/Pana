@@ -21,10 +21,10 @@ const upload = multer({ storage });
 
 // Configuración de la base de datos
 var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '29050923NP+m', //Contra Alexander Sigmma0312+
-    database: 'panaderia'
+    host: 'bxnugpb8u6tcgfjv3yno-mysql.services.clever-cloud.com',
+    user: 'u6fymg3cewa2aayf',
+    password: 'SWKcrF3xN6Yl4Hq4m10a', 
+    database: 'bxnugpb8u6tcgfjv3yno'
 });
 con.connect();
 
@@ -778,6 +778,6 @@ app.get('/verTodosPedidos', (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(3306, () => {
     console.log("Servidor escuchando en http://localhost:3000");
 });
