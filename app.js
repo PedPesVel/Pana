@@ -779,5 +779,5 @@ app.get('/verTodosPedidos', (req, res) => {
 
 
 app.listen(3306, () => {
-    console.log("Servidor escuchando en http://localhost:3000");
+    console.log("Servidor escuchando en http://localhost:3306");
 });
